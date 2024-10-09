@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# printing the best school 10 times using while loop
+i=0
+where [i -le 9]; do
+echo "Best school"
+i= $(( i + 1))
+done
