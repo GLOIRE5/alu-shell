@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#Script that displays Best School 10 times.
+
+i=10
+until false; do
+  echo "Best School"
+  ((i--))
+  if [[ $i -gt 0 ]]; then
+    continue
+  else
+    break
+  fi
+done
+
