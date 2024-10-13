@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Display a list of all running processes for all users, including those without a TTY, in a user-oriented format
+# Show process hierarchy using the 'ps' command
+echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
+ps -eo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,command --forest | head -50
+
