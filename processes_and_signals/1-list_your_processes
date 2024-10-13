@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# This script displays all running processes for all users, including those without a TTY, in a user-oriented format, showing process hierarchy.
-
-# Display the header
+# Display the list of all processes for all users in a user-friendly format
+# and include the process hierarchy (without missing any non-TTY processes)
 echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
 
-# Display all running processes in a user-oriented format with process hierarchy
-ps -eo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,command --forest | head -50
+# Use 'ps' to get the required fields for all processes, and include --forest to show the hierarchy
+ps -eo user,pid,pcpu,pmem,vsz,rss,tty,stat,start,time,command --sort=user --forest | head -50
+
 
