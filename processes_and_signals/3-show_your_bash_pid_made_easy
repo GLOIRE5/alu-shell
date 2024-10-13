@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Loop through the /proc directory, checking each process folder
+for pid in /proc/[0-9]*/; do
+  # Check if the process name contains "bash"
+  if grep -q bash "$pid/comm" 2>/dev/null; then
+    # Print the PID and the process name
+    echo "$(basename $pid) $(cat $pid/comm)"
+  fi
+done
+
