@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
-# Display all running processes including those without a TTY in a user-friendly format
-# Show process hierarchy using ps --forest
+# Loop through the /proc directory, checking each process folder
+for pid in /proc/[0-9]*/; do
+  # Check if the process name contains "bash"
+  if grep -q bash "$pid/comm" 2>/dev/null; then
+    # Retrieve the user, full start time, and command name
+    user=$(stat -c '%U' "$pid")  # Get the user who owns the process
+    start=$(ls --full-time "$pid" | grep comm | awk '{print $6, $7}')  # Get full start time
+    command=$(cat "$pid/comm")  # Get the command name
 
-echo "USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND"
-
-# Show all processes with the hierarchy and format without limiting to 50 lines
-ps -e -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command --forest
+    # Print the process details in the expected format
+    echo "$user $start $command"
+  fi
+done
 
